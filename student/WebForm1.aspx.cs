@@ -111,7 +111,7 @@ return courses;
                     sqlCommand.Parameters.AddWithValue("Specialization", ID_SPECIALIZATION.SelectedValue);
                     sqlCommand.ExecuteNonQuery();
                 }
-               /* using (var connect = new SqlCommand(insertStatment_S, sqlConnection))
+               using (var connect = new SqlCommand(insertStatment_S, sqlConnection))
                 {
                     connect.Parameters.AddWithValue("Student", ID_FIRST_NAME.Text);        
                     connect.Parameters.AddWithValue("Student",ID_LAST_NAME.Text);
@@ -120,7 +120,7 @@ return courses;
                     connect.Parameters.AddWithValue("Student", ID_COMMENTS.InnerText);
                     connect.ExecuteNonQuery();
                 }
-               */
+               
 
             }
         }
