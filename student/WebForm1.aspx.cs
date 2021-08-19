@@ -34,6 +34,7 @@ namespace student
                 command.CommandText = "Select * From Student";
                 using(DbDataReader reader = command.ExecuteReader())
                 {
+                    //go
                     while (reader.Read())
                     {
                         courses.Add(new course{
