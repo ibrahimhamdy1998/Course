@@ -6,11 +6,12 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace student
 {
     
-    public class dbrepo
+   /* public class dbrepo
     {
         DbProviderFactory factory;
         string provider;
@@ -57,23 +58,23 @@ return courses;
         public string Lname { get; set; }
 
 
-    }
+    }*/
     public partial class WebForm1 : System.Web.UI.Page
     { 
        protected void Page_Load(object sender, EventArgs e)
         {
-            string conn = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
+       /*     string conn = ConfigurationManager.ConnectionStrings["myConnectionString"].ConnectionString;
 
             dbrepo hhhh = new dbrepo();
             
             //fill special
 
-           /* if (!IsPostBack)
+            if (!IsPostBack)
             {
                 fname.Text = "Ali";
 
             }*/
-
+            
         }
         protected void Cancel_Click(object sender, EventArgs e)
         {
@@ -92,6 +93,35 @@ return courses;
             if(ID_MALE.Checked || ID_FEMALE.Checked)
             {
                 
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            var insertStatment = "INSERT into Specialization (Specialization) values(@Specialization)";
+            var insertStatment_S = "INSERT into Student (Fname,Lname,Age,Email,Comments) values(@Fname,@Lname,@Age,@Email,@Comments)";
+            //var insertStatment_Gender = "INSERT into Gender (Gender) values(@Gender)";
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (var sqlCommand = new SqlCommand(insertStatment,sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("Specialization", ID_SPECIALIZATION.SelectedValue);
+                    sqlCommand.ExecuteNonQuery();
+                }
+               /* using (var connect = new SqlCommand(insertStatment_S, sqlConnection))
+                {
+                    connect.Parameters.AddWithValue("Student", ID_FIRST_NAME.Text);        
+                    connect.Parameters.AddWithValue("Student",ID_LAST_NAME.Text);
+                    connect.Parameters.AddWithValue("Student", ID_AGE.Text);
+                    connect.Parameters.AddWithValue("Student", ID_EMAIL.Text);
+                    connect.Parameters.AddWithValue("Student", ID_COMMENTS.InnerText);
+                    connect.ExecuteNonQuery();
+                }
+               */
+
             }
         }
     }

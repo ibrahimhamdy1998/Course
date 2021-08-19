@@ -130,15 +130,16 @@
             <label>Spcialization</label>
             <br/>
             <asp:DropDownList runat="server" ID="ID_SPECIALIZATION" Style="border-radius: 25px">
-                <%--<asp:ListItem Text="" Selected="True" Value="0" />
+                <asp:ListItem Text="" Selected="True" Value="0" />
                 <asp:ListItem Text="computer science" Value="1"/>
                 <asp:ListItem Text="IT" Value="2"/>
-                <asp:ListItem Text="Accountaing" Value="3"/>--%>
+                <asp:ListItem Text="Accountaing" Value="3"/>
             </asp:DropDownList>
             <br />
             <label>comments</label>
             <br/>
             <textarea runat="server" id="ID_COMMENTS" maxlength="500" cols="20" rows="7" style="border-radius: 25px"> </textarea>
+            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
             <br/>
 
             <asp:Button Text="Register" OnClick="Register_Click" runat="server" OnClientClick="javascript:return Check();" ID="REGISTER" Style="background-color: green; color: white; font-weight: bold" />
