@@ -123,17 +123,17 @@
             <br/>
             <label>Gender</label>
             <br/>
-            <asp:RadioButton ID="ID_MALE" Text="male" runat="server" GroupName="GENDER" />
+            <asp:RadioButton ID="ID_MALE" Text="male" runat="server" GroupName="GENDER"/>
             <br/>
             <asp:RadioButton ID="ID_FEMALE" Text="female" runat="server" GroupName="GENDER" />
             <br/>
             <label>Spcialization</label>
             <br/>
             <asp:DropDownList runat="server" ID="ID_SPECIALIZATION" Style="border-radius: 25px">
-                <asp:ListItem Text="" Selected="True" Value="0" />
+               <%-- <asp:ListItem Text="" Selected="True" Value="0" />
                 <asp:ListItem Text="computer science" Value="1"/>
                 <asp:ListItem Text="IT" Value="2"/>
-                <asp:ListItem Text="Accountaing" Value="3"/>
+                <asp:ListItem Text="Accountaing" Value="3"/>--%>
             </asp:DropDownList>
             <br />
             <label>comments</label>
