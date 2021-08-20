@@ -101,7 +101,7 @@ return courses;
             var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
             var insertStatment = "INSERT into Specialization (Specialization) values(@Specialization)";
             var insertStatment_S = "INSERT into Student (Fname,Lname,Age,Email,Comments) values(@Fname,@Lname,@Age,@Email,@Comments)";
-            //var insertStatment_Gender = "INSERT into Gender (Gender) values(@Gender)";
+           // var insertStatment_Gender = "INSERT into Gender (Gender) values(@Gender)";
 
             using (var sqlConnection = new SqlConnection(connectionString))
             {
@@ -111,18 +111,25 @@ return courses;
                     sqlCommand.Parameters.AddWithValue("Specialization", ID_SPECIALIZATION.SelectedValue);
                     sqlCommand.ExecuteNonQuery();
                 }
-               using (var connect = new SqlCommand(insertStatment_S, sqlConnection))
+
+            }
+
+          
+
+            using (var go = new SqlConnection(connectionString))
+            {
+                go.Open();
+                using (var connect = new SqlCommand(insertStatment_S, go))
                 {
-                    connect.Parameters.AddWithValue("Student", ID_FIRST_NAME.Text);        
-                    connect.Parameters.AddWithValue("Student",ID_LAST_NAME.Text);
+                    connect.Parameters.AddWithValue("Student", ID_FIRST_NAME.Text);
+                    connect.Parameters.AddWithValue("Student", ID_LAST_NAME.Text);
                     connect.Parameters.AddWithValue("Student", ID_AGE.Text);
-                    connect.Parameters.AddWithValue("Student", ID_EMAIL.Text);
+                    connect.Parameters.AddWithValue("Student", ID_MALE.Text);
                     connect.Parameters.AddWithValue("Student", ID_COMMENTS.InnerText);
                     connect.ExecuteNonQuery();
                 }
-                
 
-            }
+       
         }
     }
 }
