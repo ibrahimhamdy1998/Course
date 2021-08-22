@@ -87,6 +87,15 @@ namespace student
         protected global::System.Web.UI.WebControls.DropDownList ID_SPECIALIZATION;
 
         /// <summary>
+        /// ID_CITY control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ID_CITY;
+
+        /// <summary>
         /// ID_COMMENTS control.
         /// </summary>
         /// <remarks>
@@ -103,15 +112,6 @@ namespace student
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-
-        /// <summary>
-        /// REGISTER control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button REGISTER;
 
         /// <summary>
         /// CANCEL control.

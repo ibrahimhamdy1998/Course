@@ -65,7 +65,9 @@ namespace student
         {
             if (!IsPostBack)
             {
+                FillCity();
                 FillSpecialization();
+
             }
 
 
@@ -87,6 +89,40 @@ namespace student
 
         }
 
+        //private void FFILLDB()
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ToString();
+        //    using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+        //    {
+        //        string commandText = "INSERT INTO Student(Fname,Lname,Age,Email) values(@Fname,@Lname,@Age,Email)";
+        //        SqlCommand cmd = new SqlCommand();
+        //        cmd.Connection = sqlConnection;
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = commandText;
+        //        cmd.Parameters.AddWithValue("@Fname",ID_FIRST_NAME.Text );
+        //        cmd.Parameters.AddWithValue("@Lname", ID_LAST_NAME.Text);
+        //        cmd.Parameters.AddWithValue("@Age",int.Parse(ID_AGE.Text));
+        //        cmd.Parameters.AddWithValue("@Email", ID_EMAIL.Text);
+        //        if (sqlConnection.State == System.Data.ConnectionState.Closed)
+        //            sqlConnection.Open();
+
+        //        using (SqlDataReader dataReader = cmd.ExecuteReader())
+        //        {
+
+        //            while (dataReader.Read())
+        //            {
+        //                ListItem item = new ListItem();
+        //                item.Value = dataReader["SPECIALIZATION_ID"].ToString();
+        //                item.Text = dataReader["Specialization"].ToString();
+
+        //                ID_SPECIALIZATION.Items.Add(item);
+        //            }
+        //            sqlConnection.Close();
+        //        }
+        //    } //close coneection auto
+
+
+        //}
         private void FillSpecialization()
         {
             int id = 0;
@@ -102,7 +138,7 @@ namespace student
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = commandText;
                 cmd.Parameters.AddWithValue("@id", id);
-                
+
                 if (sqlConnection.State == System.Data.ConnectionState.Closed)
                     sqlConnection.Open();
 
@@ -123,6 +159,42 @@ namespace student
 
         }
 
+        private void FillCity()
+        {
+            int id = 0;
+            // Call DB
+            //Select Id,Name from Specialization
+            string connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ToString();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                string commandText = "select ID,Name from City where ID > @id";
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = sqlConnection;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = commandText;
+                cmd.Parameters.AddWithValue("@id", id);
+
+                if (sqlConnection.State == System.Data.ConnectionState.Closed)
+                    sqlConnection.Open();
+
+                using (SqlDataReader dataReader = cmd.ExecuteReader())
+                {
+                    while (dataReader.Read())
+                    {
+                        ListItem item = new ListItem();
+                        item.Value = dataReader["ID"].ToString();
+                        item.Text = dataReader["Name"].ToString();
+                        ID_CITY.Items.Add(item);
+
+                    }
+                    sqlConnection.Close();
+                }
+            }
+
+
+        }
+
         protected void Cancel_Click(object sender, EventArgs e)
         {
             ID_AGE.Text = "";
@@ -135,48 +207,114 @@ namespace student
             ID_COMMENTS.InnerText = "";
         }
 
-        protected void Register_Click(object sender, EventArgs e)
+        SqlCommand cmd;
+        SqlConnection con;
+        SqlDataAdapter da;
+
+        public void insert()
         {
-            if (ID_MALE.Checked || ID_FEMALE.Checked)
+            string connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ToString();
+
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
             {
+                string commandText = "INSERT INTO Student (Fname,Lname,Age,Email,Comments) VALUES(@Fname,@Lname,@Age,@Email,@Comments);";
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = sqlConnection;
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = commandText;
+                if (sqlConnection.State == System.Data.ConnectionState.Closed)
+                    sqlConnection.Open();
+                cmd.Parameters.Add("Fname", System.Data.SqlDbType.VarChar, 200).Value = ID_FIRST_NAME.Text;
+                cmd.ExecuteNonQuery();
+                sqlConnection.Close();
+
+
+
 
             }
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+
+        private void insertstudent()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
-            var insertStatment = "INSERT into Specialization (Specialization) values(@Specialization)";
-            var insertStatment_S = "INSERT into Student (Fname,Lname,Age,Email,Comments) values(@Fname,@Lname,@Age,@Email,@Comments)";
-            // var insertStatment_Gender = "INSERT into Gender (Gender) values(@Gender)";
-
+            var insertstatment = "INSERT into Student (Fname,Lname,Age,Email,Comments) values (@Fname,@Lname,@Age,@Email,@Comments)";
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
-                using (var sqlCommand = new SqlCommand(insertStatment, sqlConnection))
+                using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
                 {
-                    sqlCommand.Parameters.AddWithValue("Specialization", ID_SPECIALIZATION.SelectedValue);
+                    sqlCommand.Parameters.AddWithValue("@Fname", ID_FIRST_NAME.Text);
+                    sqlCommand.Parameters.AddWithValue("@Lname", ID_LAST_NAME.Text);
+                    sqlCommand.Parameters.AddWithValue("@Age", int.Parse(ID_AGE.Text));
+                    sqlCommand.Parameters.AddWithValue("@Email", ID_EMAIL.Text);
+                    sqlCommand.Parameters.AddWithValue("@Comments", ID_COMMENTS.InnerText);
                     sqlCommand.ExecuteNonQuery();
+
                 }
-
             }
-
-
-
-            /*    using (var go = new SqlConnection(connectionString))
+        }
+        
+        private void insertcity()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            var insertstatment = "INSERT into City (Name) values (@Name)";
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
                 {
-                    go.Open();
-                    using (var connect = new SqlCommand(insertStatment_S, go))
-                    {
-                        connect.Parameters.AddWithValue("Student", ID_FIRST_NAME.Text);
-                        connect.Parameters.AddWithValue("Student", ID_LAST_NAME.Text);
-                        connect.Parameters.AddWithValue("Student", ID_AGE.Text);
-                        connect.Parameters.AddWithValue("Student", ID_MALE.Text);
-                        connect.Parameters.AddWithValue("Student", ID_COMMENTS.InnerText);
-                        connect.ExecuteNonQuery();
-                    }
+                    sqlCommand.Parameters.AddWithValue("@Name", ID_CITY.SelectedValue);
+                    sqlCommand.ExecuteNonQuery();
 
-           */
+                }
+            }
+        }
+        private void insertspecilization()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            var insertstatment = "INSERT into Specialization (Specialization) values (@Specialization)";
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
+                {
+                    sqlCommand.Parameters.AddWithValue("@Specialization", ID_SPECIALIZATION.SelectedValue);
+                    sqlCommand.ExecuteNonQuery();
+
+                }
+            }
+        }
+        private void insertgender()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            var insertstatment = "INSERT into Gender (Gender) values (@Gender)";
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
+                {   
+                    if(ID_MALE.Checked)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Gender", ID_MALE.Checked);
+                     
+                    }
+                    if(ID_FEMALE.Checked)
+                    {
+                        sqlCommand.Parameters.AddWithValue("@Gender", ID_FEMALE.Checked);
+                   
+                    }
+                    sqlCommand.ExecuteNonQuery();
+
+                }
+            }
+        }
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            insertstudent();
+            insertspecilization();
+            insertcity();
+            insertgender();
         }
     }
 }

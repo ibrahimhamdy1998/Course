@@ -135,6 +135,12 @@
                 <asp:ListItem Text="IT" Value="2"/>
                 <asp:ListItem Text="Accountaing" Value="3"/>--%>
             </asp:DropDownList>
+          <br />
+            <label>City</label>
+                <br />
+            <asp:DropDownList runat="server" ID="ID_CITY" Style="border-radius: 25px">
+            </asp:DropDownList>
+                         
             <br />
             <label>comments</label>
             <br/>
@@ -142,7 +148,7 @@
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
             <br/>
 
-            <asp:Button Text="Register" OnClick="Register_Click" runat="server" OnClientClick="javascript:return Check();" ID="REGISTER" Style="background-color: green; color: white; font-weight: bold" />
+<%--            <asp:Button Text="Register" OnClick="Register_Click" runat="server" OnClientClick="javascript:return Check();" ID="REGISTER" Style="background-color: green; color: white; font-weight: bold" />--%>
             <asp:Button Text="Cancel" runat="server" ID="CANCEL" Style="background-color: red; color: white; font-weight: bold" OnClick="Cancel_Click" />
             <button type="button" onclick="Clear()" id="CANCLE_JS" style="color: black; font-weight: bold; background-color: yellow; width: 75px; height: 25px">Cancel.js</button>
         </form>
