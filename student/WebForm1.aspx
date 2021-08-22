@@ -91,7 +91,7 @@
             if (!$("input[name='GENDER']:checked").val()) {
                 alert('select your gender');
             }
-            if ($("ID_SPECIALIZATION").val('0')) {
+            if ($("#ID_SPECIALIZATION").val('0')) {
                 alert("select your specialization")
             }
           

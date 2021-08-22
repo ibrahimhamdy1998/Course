@@ -125,6 +125,14 @@ namespace student
         //}
         private void FillSpecialization()
         {
+
+            ID_SPECIALIZATION.Items.Add(new ListItem
+            {
+                Value = "0",
+                Text = "please select",
+                Selected = true
+
+            });
             int id = 0;
             // Call DB
             //Select Id,Name from Specialization
@@ -238,7 +246,7 @@ namespace student
         private void insertstudent()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
-            var insertstatment = "INSERT into Student (Fname,Lname,Age,Email,Comments) values (@Fname,@Lname,@Age,@Email,@Comments)";
+            var insertstatment = "INSERT into Student (Fname,Lname,Age,Email,Comments,SPECIALIZATION_ID) values (@Fname,@Lname,@Age,@Email,@Comments,@SPECIALIZATION_ID)";
             using (var sqlConnection = new SqlConnection(connectionString))
             {
                 sqlConnection.Open();
@@ -249,12 +257,13 @@ namespace student
                     sqlCommand.Parameters.AddWithValue("@Age", int.Parse(ID_AGE.Text));
                     sqlCommand.Parameters.AddWithValue("@Email", ID_EMAIL.Text);
                     sqlCommand.Parameters.AddWithValue("@Comments", ID_COMMENTS.InnerText);
+                    sqlCommand.Parameters.AddWithValue("@SPECIALIZATION_ID", ID_SPECIALIZATION.SelectedValue);
                     sqlCommand.ExecuteNonQuery();
 
                 }
             }
         }
-        
+
         private void insertcity()
         {
             var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
@@ -293,16 +302,16 @@ namespace student
             {
                 sqlConnection.Open();
                 using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
-                {   
-                    if(ID_MALE.Checked)
+                {
+                    if (ID_MALE.Checked)
                     {
                         sqlCommand.Parameters.AddWithValue("@Gender", ID_MALE.Checked);
-                     
+
                     }
-                    if(ID_FEMALE.Checked)
+                    if (ID_FEMALE.Checked)
                     {
                         sqlCommand.Parameters.AddWithValue("@Gender", ID_FEMALE.Checked);
-                   
+
                     }
                     sqlCommand.ExecuteNonQuery();
 
@@ -312,9 +321,9 @@ namespace student
         protected void Button1_Click(object sender, EventArgs e)
         {
             insertstudent();
-            insertspecilization();
-            insertcity();
-            insertgender();
+            //insertspecilization();
+            //insertcity();
+            //insertgender();
         }
     }
 }
