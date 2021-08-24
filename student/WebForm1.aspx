@@ -103,8 +103,12 @@
                 alert("select your specialization")
                 return false;
             }
-                    
+
+
+
         }
+        
+    
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">  
             
@@ -122,52 +126,45 @@
     </ul>
   </div>
 </nav>
-    <div>
+    <div Style="margin-left:600px;margin-right:600px">
         <form id="form1" runat="server" class="form">
-            <label class="label label-primary">First Name</label>
             
-            <asp:TextBox runat="server" class="form-control" ID="ID_FIRST_NAME" MaxLength="10" Style="border-radius: 25px"></asp:TextBox>
+            <asp:TextBox placeholder="Enter First Name" runat="server" class="form-control" ID="ID_FIRST_NAME" MaxLength="10"></asp:TextBox>
             <br />
-            <label class="label label-primary">Last Name</label>
+            <asp:TextBox placeholder="Enter Last Name" runat="server" class="form-control" ID="ID_LAST_NAME" MaxLength="10" > </asp:TextBox>
             <br />
-            <asp:TextBox runat="server" class="form-control" ID="ID_LAST_NAME" MaxLength="10" Style="border-radius: 25px"> </asp:TextBox>
-          <br />
-            <label class="label label-primary">age</label>
+            <asp:TextBox placeholder="Enter Your Age" runat="server" class="form-control" ID="ID_AGE" MaxLength="2"></asp:TextBox>
             <br />
-            <asp:TextBox runat="server" class="form-control" ID="ID_AGE" MaxLength="2" Style="border-radius: 25px"></asp:TextBox>
+            <asp:TextBox placeholder="Enter Your Email" type="email" class="form-control" runat="server" ID="ID_EMAIL" MaxLength="50"></asp:TextBox>
             <br />
-            <label class="label label-primary">Email</label>
+            <label class="badge badge-secondary">Gender</label>
             <br />
-            <asp:TextBox type="email" class="form-control" runat="server" ID="ID_EMAIL" MaxLength="50" Style="border-radius: 25px"></asp:TextBox>
+            <asp:RadioButton class="form-check-input" ID="ID_MALE" Text="Male" runat="server" GroupName="GENDER" />
+            <asp:RadioButton class="form-check-input" ID="ID_FEMALE" Text="Female" runat="server" GroupName="GENDER" />
             <br />
-            <label class="label label-primary">Gender</label>
-            <br />
-            <asp:RadioButton ID="ID_MALE" Text="male" runat="server" GroupName="GENDER" />
-            <br />
-            <asp:RadioButton ID="ID_FEMALE" Text="female" runat="server" GroupName="GENDER" />
-            <br />
-            <label class="label label-primary">Spcialization</label>
-            <br />
-            <asp:DropDownList  runat="server" ID="ID_SPECIALIZATION" Style="border-radius: 25px">
+            <label class="badge badge-secondary">Specialization</label>
+            <asp:DropDownList runat="server" ID="ID_SPECIALIZATION" CssClass="form-control">
                 <%-- <asp:ListItem Text="" Selected="True" Value="0" />
                 <asp:ListItem Text="computer science" Value="1"/>
                 <asp:ListItem Text="IT" Value="2"/> 
                 <asp:ListItem Text="Accountaing" Value="3"/>--%>
             </asp:DropDownList>
             <br />
-            <label class="label label-primary">City</label>
+            <label class="badge badge-secondary">City</label>
             <br />
-            <asp:DropDownList runat="server" ID="ID_CITY" Style="border-radius: 25px">
+            <asp:DropDownList runat="server" ID="ID_CITY"  CssClass="form-control">
             </asp:DropDownList>
-
             <br />
-            <label class="label label-primary">comments</label>
+            <label  class="badge badge-secondary">Comments</label>
             <br />
-            <textarea runat="server" class="form-control" id="ID_COMMENTS" maxlength="500" cols="20" rows="7" style="border-radius: 25px"> </textarea>
+            <textarea runat="server" class="form-control" id="ID_COMMENTS" maxlength="500" cols="20" rows="7"> </textarea>
             <br />
+            <div style="text-align:center">
             <asp:Button Text="Register" OnClick="Register_Click" runat="server" OnClientClick="javascript:return Check();" ID="REGISTER"  class="btn btn-success"/>
             <asp:Button Text="Cancel" runat="server" ID="CANCEL" class="btn btn-danger" OnClick="Cancel_Click" />
-        </form> 
+            </div>
+            </form> 
     </div>
+    
 </body>
 </html>
