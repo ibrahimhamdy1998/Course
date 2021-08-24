@@ -263,9 +263,9 @@ namespace student
             }
             catch
             {
-                
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Your data dosent inserted')", true);
             }
-            
+
         }
         //private void FillCity()
         //{
