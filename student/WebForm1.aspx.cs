@@ -209,16 +209,20 @@ namespace student
             }
 
         }
-        protected void Cancel_Click(object sender, EventArgs e)
+
+        private void cancel()
         {
             ID_AGE.Text = "";
             ID_FIRST_NAME.Text = "";
             ID_LAST_NAME.Text = "";
             ID_EMAIL.Text = "";
-            ID_SPECIALIZATION.SelectedValue = "0";
             ID_MALE.Checked = false;
             ID_FEMALE.Checked = false;
             ID_COMMENTS.InnerText = "";
+        }
+        protected void Cancel_Click(object sender, EventArgs e)
+        {
+            cancel();
         }
         private void insertstudent()
         {
@@ -251,7 +255,17 @@ namespace student
         }
         protected void Register_Click(object sender, EventArgs e)
         {
-            insertstudent();
+
+            try
+            {
+                insertstudent();
+                cancel();
+            }
+            catch
+            {
+                
+            }
+            
         }
         //private void FillCity()
         //{
