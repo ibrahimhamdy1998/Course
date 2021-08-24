@@ -24,6 +24,7 @@
         .form {
             text-align: left;
         }
+
         #TextArea1 {
             height: 94px;
             width: 269px;
@@ -77,81 +78,86 @@
         function Check() {
             if ($("#ID_FIRST_NAME").val() == "") {
                 alert("fill first name");
+                return false;
             }
             if ($("#ID_LAST_NAME").val() == "") {
                 alert("fill last name");
+                return false;
             }
             if ($("#ID_AGE").val() == "") {
                 alert("fill your age");
+                return false;
             }
             if ($("#ID_EMAIL").val() == "") {
                 alert("fill your email");
+                return false;
             }
-         
             if (!$("input[name='GENDER']:checked").val()) {
                 alert('select your gender');
+                return false;
+
             }
-            if ($("#ID_SPECIALIZATION").val('0')) {
+            if ($("#ID_SPECIALIZATION").val() == '0') {
                 alert("select your specialization")
+                return false;
             }
-          
+                    
         }
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">  
             
-            </script>
+    </script>
 </head>
 <body class="all">
     <h1>Registration</h1>
     <div>
         <form id="form1" runat="server" class="form">
             <label>First Name</label>
-            <br/>
+            <br />
             <asp:TextBox runat="server" ID="ID_FIRST_NAME" MaxLength="10" Style="border-radius: 25px"></asp:TextBox>
-            <br/>
+            <br />
             <label>Last Name</label>
-            <br/>
+            <br />
             <asp:TextBox runat="server" ID="ID_LAST_NAME" MaxLength="10" Style="border-radius: 25px"> </asp:TextBox>
-            <textarea id="TextArea1" name="S1"></textarea><br/>
+            <textarea id="TextArea1" name="S1"></textarea><br />
             <label>age</label>
-            <br/>
+            <br />
             <asp:TextBox runat="server" ID="ID_AGE" MaxLength="2" Style="border-radius: 25px"></asp:TextBox>
-            <br/>
+            <br />
             <label>Email</label>
-            <br/>
+            <br />
             <asp:TextBox type="email" runat="server" ID="ID_EMAIL" MaxLength="50" Style="border-radius: 25px"></asp:TextBox>
-            <br/>
+            <br />
             <label>Gender</label>
-            <br/>
-            <asp:RadioButton ID="ID_MALE" Text="male" runat="server" GroupName="GENDER"/>
-            <br/>
+            <br />
+            <asp:RadioButton ID="ID_MALE" Text="male" runat="server" GroupName="GENDER" />
+            <br />
             <asp:RadioButton ID="ID_FEMALE" Text="female" runat="server" GroupName="GENDER" />
-            <br/>
+            <br />
             <label>Spcialization</label>
-            <br/>
+            <br />
             <asp:DropDownList runat="server" ID="ID_SPECIALIZATION" Style="border-radius: 25px">
-               <%-- <asp:ListItem Text="" Selected="True" Value="0" />
+                <%-- <asp:ListItem Text="" Selected="True" Value="0" />
                 <asp:ListItem Text="computer science" Value="1"/>
-                <asp:ListItem Text="IT" Value="2"/>
+                <asp:ListItem Text="IT" Value="2"/> 
                 <asp:ListItem Text="Accountaing" Value="3"/>--%>
             </asp:DropDownList>
-          <br />
+            <br />
             <label>City</label>
-                <br />
+            <br />
             <asp:DropDownList runat="server" ID="ID_CITY" Style="border-radius: 25px">
             </asp:DropDownList>
-                         
+
             <br />
             <label>comments</label>
-            <br/>
+            <br />
             <textarea runat="server" id="ID_COMMENTS" maxlength="500" cols="20" rows="7" style="border-radius: 25px"> </textarea>
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-            <br/>
+            <br />
 
-<%--            <asp:Button Text="Register" OnClick="Register_Click" runat="server" OnClientClick="javascript:return Check();" ID="REGISTER" Style="background-color: green; color: white; font-weight: bold" />--%>
+            <asp:Button Text="Register" OnClick="Register_Click" runat="server" OnClientClick="javascript:return Check();" ID="REGISTER" Style="background-color: green; color: white; font-weight: bold" />
             <asp:Button Text="Cancel" runat="server" ID="CANCEL" Style="background-color: red; color: white; font-weight: bold" OnClick="Cancel_Click" />
             <button type="button" onclick="Clear()" id="CANCLE_JS" style="color: black; font-weight: bold; background-color: yellow; width: 75px; height: 25px">Cancel.js</button>
-        </form>
+        </form> 
     </div>
     <script>
 
