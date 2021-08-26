@@ -8,6 +8,13 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 </head>
+    <script  >
+
+
+    </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js">  
+            
+    </script>
 <body>
    <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -17,24 +24,36 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
       <li><a href="#">Registration</a></li>
+
     </ul>
   </div>
 </nav>
     <form id="form1" runat="server">
+       
         <div style="margin-left:100px; margin-right:100px;">
-            <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"   GridLines="None" AutoGenerateColumns="false" runat="server" >
+              <label class="badge badge-secondary">Add Filter</label>
+            <br />
+                     <asp:DropDownList runat="server" ID="Filter" CssClass="form-control" >
+        </asp:DropDownList>
+            <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"   GridLines="None" runat="server" AutoGenerateColumns="false" >
                    <Columns>
-                            <asp:BoundField DataField="ID" HeaderText="Sudent ID" />
-                            <asp:BoundField DataField="Fname" HeaderText="First Name" />
+                       <asp:BoundField DataField="ID" HeaderText="ID" />
+                            
+                       <asp:BoundField DataField="Fname" HeaderText="First Name" />
                             <asp:BoundField DataField="Lname" HeaderText="Last Name" />
                             <asp:BoundField DataField="Age" HeaderText="Age" />
                             <asp:BoundField DataField="Email" HeaderText="Email" />
                             <asp:BoundField DataField="Accpetance" HeaderText="Registration Date" />
                             <asp:BoundField DataField="Is_accepted" HeaderText="Accepted Or Not" />
+                            <asp:BoundField DataField="Comments" HeaderText="Comments" />
+                            <asp:BoundField DataField="Specialization" HeaderText="Specialization" />
+                            <asp:BoundField DataField="Gender" HeaderText="Gender" />
+                            <asp:BoundField DataField="Town_NAme" HeaderText="City" />
+
+                            
                         </Columns>
             </asp:GridView>
-                       <asp:GridView runat="server" ID="ss"  CssClass="table table-hover table-striped"    GridLines="None" ></asp:GridView>
-            
+            <button onclick="filter();"> ok </button>
             
         </div>
     </form>
