@@ -224,34 +224,49 @@ namespace student
         {
             cancel();
         }
+
         private void insertstudent()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
-            var insertstatment = "INSERT into Student (Fname,Lname,Age,Email,Comments,SPECIALIZATION_ID,GENDER_ID,CityId) values (@Fname,@Lname,@Age,@Email,@Comments,@SPECIALIZATION_ID,@GENDER_ID,@CityId)";
-            using (var sqlConnection = new SqlConnection(connectionString))
+            try
             {
-                sqlConnection.Open();
-                using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
+                DateTime today = DateTime.Now;
+                var connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                var insertstatment = "INSERT into Student (Fname,Lname,Age,Email,Comments,Accpetance,Is_accepted,SPECIALIZATION_ID,GENDER_ID,CityId)" +
+                                                 " values (@Fname,@Lname,@Age,@Email,@Comments,@Accpetance,@Is_accepted,@SPECIALIZATION_ID,@GENDER_ID,@CityId)";
+                using (var sqlConnection = new SqlConnection(connectionString))
                 {
-                    sqlCommand.Parameters.AddWithValue("@Fname", ID_FIRST_NAME.Text);
-                    sqlCommand.Parameters.AddWithValue("@Lname", ID_LAST_NAME.Text);
-                    sqlCommand.Parameters.AddWithValue("@Age", int.Parse(ID_AGE.Text));
-                    sqlCommand.Parameters.AddWithValue("@Email", ID_EMAIL.Text);
-                    sqlCommand.Parameters.AddWithValue("@Comments", ID_COMMENTS.InnerText);
-                    sqlCommand.Parameters.AddWithValue("@SPECIALIZATION_ID", ID_SPECIALIZATION.SelectedValue);
-                    sqlCommand.Parameters.AddWithValue("@CityId", ID_CITY.SelectedValue);
-                    if (ID_MALE.Checked)
+                    sqlConnection.Open();
+                    using (var sqlCommand = new SqlCommand(insertstatment, sqlConnection))
                     {
-                        sqlCommand.Parameters.AddWithValue("@GENDER_ID", 1);
-                    }
-                    if (ID_FEMALE.Checked)
-                    {
-                        sqlCommand.Parameters.AddWithValue("@GENDER_ID", 2);
-                    }
-                    sqlCommand.ExecuteNonQuery();
+                        sqlCommand.Parameters.AddWithValue("@Fname", ID_FIRST_NAME.Text);
+                        sqlCommand.Parameters.AddWithValue("@Lname", ID_LAST_NAME.Text);
+                        sqlCommand.Parameters.AddWithValue("@Age", int.Parse(ID_AGE.Text));
+                        sqlCommand.Parameters.AddWithValue("@Email", ID_EMAIL.Text);
 
+                        sqlCommand.Parameters.AddWithValue("@Comments", ID_COMMENTS.InnerText);
+                        sqlCommand.Parameters.AddWithValue("@Accpetance", DateTime.Now);
+
+                        sqlCommand.Parameters.AddWithValue("@SPECIALIZATION_ID", ID_SPECIALIZATION.SelectedValue);
+                        sqlCommand.Parameters.AddWithValue("@CityId", ID_CITY.SelectedValue);
+                        if (ID_MALE.Checked)
+                        {
+                            sqlCommand.Parameters.AddWithValue("@GENDER_ID", 1);
+                        }
+                        if (ID_FEMALE.Checked)
+                        {
+                            sqlCommand.Parameters.AddWithValue("@GENDER_ID", 2);
+                        }
+                        sqlCommand.ExecuteNonQuery();
+
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+            
         }
         protected void Register_Click(object sender, EventArgs e)
         {
@@ -263,10 +278,11 @@ namespace student
             }
             catch
             {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Your data dosent inserted')", true);
+          //      ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Your data dosent inserted')", true);
             }
 
         }
+    
         //private void FillCity()
         //{
         //    int id = 0;

@@ -155,7 +155,7 @@
             <asp:DropDownList runat="server" ID="ID_CITY"  CssClass="form-control">
             </asp:DropDownList>
             <br />
-            <label  class="badge badge-secondary">Comments</label>
+            <label  class="badge badge-sec  ondary">Comments</label>
             <br />
             <textarea runat="server" class="form-control" id="ID_COMMENTS" maxlength="500" cols="20" rows="7"> </textarea>
             <br />

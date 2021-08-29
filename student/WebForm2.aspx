@@ -4,17 +4,25 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Student Data</title>
+<title>Student Data</title>
+  
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>   
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script >
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+ 
 </head>
-    <script  >
 
 
-    </script>
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js">  
-            
-    </script>
+  
+   
 <body>
    <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -31,9 +39,8 @@
     <form id="form1" runat="server">
        
         <div style="margin-left:100px; margin-right:100px;">
-              <label class="badge badge-secondary">Add Filter</label>
-            <br />
-                     <asp:DropDownList runat="server" ID="Filter" CssClass="form-control" >
+                  <asp:DropDownList runat="server" ID="Filter" Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filter_SelectedIndexChanged" >
+
         </asp:DropDownList>
             <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"   GridLines="None" runat="server" AutoGenerateColumns="false" >
                    <Columns>
@@ -44,17 +51,18 @@
                             <asp:BoundField DataField="Age" HeaderText="Age" />
                             <asp:BoundField DataField="Email" HeaderText="Email" />
                             <asp:BoundField DataField="Accpetance" HeaderText="Registration Date" />
-                            <asp:BoundField DataField="Is_accepted" HeaderText="Accepted Or Not" />
                             <asp:BoundField DataField="Comments" HeaderText="Comments" />
-                            <asp:BoundField DataField="Specialization" HeaderText="Specialization" />
+                                          <asp:TemplateField HeaderText="Accepted Or Not" SortExpression="Is_accepted">
+    <ItemTemplate><%# (Boolean.Parse(Eval("Is_accepted").ToString())) ? "Yes" : "No" %></ItemTemplate>
+</asp:TemplateField>
+                       <asp:BoundField DataField="Specialization" HeaderText="Specialization" />
                             <asp:BoundField DataField="Gender" HeaderText="Gender" />
                             <asp:BoundField DataField="Town_NAme" HeaderText="City" />
-
-                            
+       
+             
                         </Columns>
-            </asp:GridView>
-            <button onclick="filter();"> ok </button>
-            
+            </asp:GridView> 
+                
         </div>
     </form>
 </body>

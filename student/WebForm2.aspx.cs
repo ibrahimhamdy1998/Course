@@ -58,7 +58,8 @@ namespace student
 
 
         }
-        
+
+  
         private void data()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ToString();
@@ -77,9 +78,10 @@ namespace student
             
             }
 
+        protected void Filter_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
-
-
+        }
     }
 
 }
