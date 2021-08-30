@@ -26,8 +26,10 @@ namespace student
         }
         private void FillCity()
         {
-            Filter.Items.Add(new ListItem { Value = "0", Text = "All", Selected = true });
             int id = 0;
+            
+            Filter.Items.Add(new ListItem { Value = "0", Text = "All", Selected = true });
+
             // Call DB
             //Select Id,Name from Specialization
             string connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ToString();
@@ -69,13 +71,21 @@ namespace student
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             String commandtext = "SELECT Student.ID,Fname,Lname,Age,Email,Is_accepted,Accpetance,Comments, Specialization,Gender,Town_NAme from Student INNER JOIN Specialization ON Student.SPECIALIZATION_ID = Specialization.SPECIALIZATION_ID INNER JOIN Gender ON Student.GENDER_ID = Gender.GENDER_ID INNER JOIN TOWN ON Student.CityId = Town.ID";
 
-            if (Filter.SelectedValue != "" && Filter.SelectedValue != "0")
+            if ((Filter.SelectedValue != "" && Filter.SelectedValue != "0")&&(Filters.SelectedValue != "" && Filters.SelectedValue != "0"))
             {
-                   commandtext += " where Student.CityId =" + Filter.SelectedValue;
-                                                                                                                    
+
+                commandtext += " where Student.CityId = " + Filter.SelectedValue   " and Student.SPECIALIZATION_ID = " + Filters.SelectedValue ;
+
             }
 
-     
+            //if (Filter.SelectedValue != "" && Filter.SelectedValue != "0")
+            //{
+            //    commandtext += " where Student.CityId =" + Filter.SelectedValue;
+
+            //}
+
+
+
             SqlCommand cmd = new SqlCommand(commandtext, sqlConnection);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
@@ -88,9 +98,12 @@ namespace student
 
 
         }
+
         private void FillSpecialization()
         {
             int id = 0;
+            Filters.Items.Add(new ListItem { Value = "0", Text = "All", Selected = true });
+
             // Call DB
             //Select Id,Name from Specialization
             string connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ToString();

@@ -24,6 +24,9 @@
         $(document).ready(function () {
             $('#Student_ID').DataTable();
         });
+        $(document).ready(function () {
+            $('.js-example-basic-multiple').select2();
+        });
     </script>
  
 </head>
@@ -47,10 +50,10 @@
     <form id="form1" runat="server">
        
         <div style="margin-left:100px; margin-right:100px;">
-                  <asp:DropDownList runat="server" ID="Filter" Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filter_SelectedIndexChanged" AutoPostBack="true">
+                  <asp:DropDownList runat="server" ID="Filter"  Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filter_SelectedIndexChanged" AutoPostBack="true">
 
         </asp:DropDownList>
-                   <asp:DropDownList runat="server" ID="Filters" Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filters_SelectedIndexChanged"    AutoPostBack="true">
+                   <asp:DropDownList runat="server" ID="Filters"   Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filters_SelectedIndexChanged"    AutoPostBack="true">
 
         </asp:DropDownList>
             <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"      GridLines="None" runat="server" AutoGenerateColumns="false" >
