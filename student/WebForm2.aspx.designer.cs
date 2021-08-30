@@ -33,6 +33,15 @@ namespace student
         protected global::System.Web.UI.WebControls.DropDownList Filter;
 
         /// <summary>
+        /// Filters control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Filters;
+
+        /// <summary>
         /// Student_ID control.
         /// </summary>
         /// <remarks>

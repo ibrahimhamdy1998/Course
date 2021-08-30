@@ -9,12 +9,20 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
          <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>   
 
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.js"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script >
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
+        });
+
+        $(document).ready(function () {
+            $('#Student_ID').DataTable();
         });
     </script>
  
@@ -39,10 +47,13 @@
     <form id="form1" runat="server">
        
         <div style="margin-left:100px; margin-right:100px;">
-                  <asp:DropDownList runat="server" ID="Filter" Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filter_SelectedIndexChanged" >
+                  <asp:DropDownList runat="server" ID="Filter" Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filter_SelectedIndexChanged" AutoPostBack="true">
 
         </asp:DropDownList>
-            <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"   GridLines="None" runat="server" AutoGenerateColumns="false" >
+                   <asp:DropDownList runat="server" ID="Filters" Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filters_SelectedIndexChanged"    AutoPostBack="true">
+
+        </asp:DropDownList>
+            <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"      GridLines="None" runat="server" AutoGenerateColumns="false" >
                    <Columns>
                        <asp:BoundField DataField="ID" HeaderText="ID" />
                             
