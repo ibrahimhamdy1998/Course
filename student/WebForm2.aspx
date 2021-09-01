@@ -7,22 +7,35 @@
 <title>Student Data</title>
   
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-         <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"> </script>   
+ <script type="text/javascript" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css" />
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.js"></script>
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script >
         // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function () {
+       
+            $("[id*=Srudent_ID]").DataTable(
+                {
+                    bLengthChange: true,
+                    lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+                    bFilter: true,
+                    bSort: true,
+                    bPaginate: true
+                });
+        });
+      
+           
+
         $(document).ready(function () {
             $('.js-example-basic-single').select2();
         });
 
         $(document).ready(function () {
-            $('#Student_ID').DataTable();
+            $('.display').DataTable();
         });
         $(document).ready(function () {
             $('.js-example-basic-multiple').select2();
@@ -56,7 +69,7 @@
                    <asp:DropDownList runat="server" ID="Filters"   Cssclass="js-example-basic-single" OnSelectedIndexChanged="Filters_SelectedIndexChanged"    AutoPostBack="true">
 
         </asp:DropDownList>
-            <asp:GridView ID="Student_ID" CssClass="table table-hover table-striped"      GridLines="None" runat="server" AutoGenerateColumns="false" >
+            <asp:GridView ID="Student_ID"   runat="server" AutoGenerateColumns="false" CssClass="display compact" >
                    <Columns>
                        <asp:BoundField DataField="ID" HeaderText="ID" />
                             

@@ -16,18 +16,22 @@ namespace student
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!Page.IsPostBack)
             {
                 FillGrid();
                 FillCity();
                 FillSpecialization();
-
+            }
+            if (!this.IsPostBack)
+            {
+                this.BindGrid();
             }
         }
         private void FillCity()
         {
             int id = 0;
-            
+
             Filter.Items.Add(new ListItem { Value = "0", Text = "All", Selected = true });
 
             // Call DB
@@ -63,7 +67,26 @@ namespace student
 
         }
 
+        private void BindGrid()
+        {
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter("SELECT Student.ID,Fname,Lname,Age,Email,Is_accepted,Accpetance,Comments, Specialization,Gender,Town_NAme from Student INNER JOIN Specialization ON Student.SPECIALIZATION_ID = Specialization.SPECIALIZATION_ID INNER JOIN Gender ON Student.GENDER_ID = Gender.GENDER_ID INNER JOIN TOWN ON Student.CityId = Town.ID", con))
+                {
+                    using (DataTable dt = new DataTable())
+                    {
+                        sda.Fill(dt);
+                        Student_ID.DataSource = dt;
+                        Student_ID.DataBind();
+                    }
+                }
+            }
 
+            //Required for jQuery DataTables to work.
+            Student_ID.UseAccessibleHeader = true;
+            Student_ID.HeaderRow.TableSection = TableRowSection.TableHeader;
+        }
         private void FillGrid()
         {
 
@@ -71,12 +94,49 @@ namespace student
             SqlConnection sqlConnection = new SqlConnection(connectionString);
             String commandtext = "SELECT Student.ID,Fname,Lname,Age,Email,Is_accepted,Accpetance,Comments, Specialization,Gender,Town_NAme from Student INNER JOIN Specialization ON Student.SPECIALIZATION_ID = Specialization.SPECIALIZATION_ID INNER JOIN Gender ON Student.GENDER_ID = Gender.GENDER_ID INNER JOIN TOWN ON Student.CityId = Town.ID";
 
-            if ((Filter.SelectedValue != "" && Filter.SelectedValue != "0")&&(Filters.SelectedValue != "" && Filters.SelectedValue != "0"))
+            if ((Filter.SelectedValue != "" && Filter.SelectedValue != "0") && (Filters.SelectedValue != "" && Filters.SelectedValue != "0"))
+            {
+                commandtext += " Where Student.CityId = " + Filter.SelectedValue + " And Student.SPECIALIZATION_ID = " + Filters.SelectedValue;
+            }
+            else if (Filter.SelectedValue != "" && Filter.SelectedValue != "0")
             {
 
-                commandtext += " where Student.CityId = " + Filter.SelectedValue   " and Student.SPECIALIZATION_ID = " + Filters.SelectedValue ;
+                commandtext += " where Student.CityId = " + Filter.SelectedValue;
 
             }
+            else if (Filters.SelectedValue != "" && Filters.SelectedValue != "0")
+            {
+
+                commandtext += " where Student.SPECIALIZATION_ID = " + Filters.SelectedValue;
+
+            }
+
+
+
+            #region Other If
+            //var andWord = "";
+
+            //if ((Filter.SelectedValue != "" && Filter.SelectedValue != "0") || (Filters.SelectedValue != "" && Filters.SelectedValue != "0"))
+            //{
+            //    commandtext += " Where ";
+            //}
+
+            //if (Filter.SelectedValue != "" && Filter.SelectedValue != "0")
+            //{
+
+            //    commandtext += " Student.CityId = " + Filter.SelectedValue;
+            //    andWord = " and ";
+
+            //}
+
+            //if (Filters.SelectedValue != "" && Filters.SelectedValue != "0")
+            //{
+
+            //    commandtext += andWord + " Student.SPECIALIZATION_ID = " + Filters.SelectedValue;
+
+            //}
+            #endregion
+
 
             //if (Filter.SelectedValue != "" && Filter.SelectedValue != "0")
             //{
@@ -144,6 +204,12 @@ namespace student
         protected void Filters_SelectedIndexChanged(object sender, EventArgs e)
         {
             FillGrid();
+        }
+
+        protected void Student_ID_DataBound(object sender, EventArgs e)
+        {
+
+     
         }
     }
 
