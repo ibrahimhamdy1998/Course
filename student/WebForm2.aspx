@@ -18,13 +18,15 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function () {
        
-            $("[id*=Srudent_ID]").DataTable(
+            $('#Student_ID').DataTable(
                 {
                     bLengthChange: true,
                     lengthMenu: [[5, 10, -1], [5, 10, "All"]],
+                    
                     bFilter: true,
                     bSort: true,
                     bPaginate: true
+                    
                 });
         });
       
@@ -35,7 +37,7 @@
         });
 
         $(document).ready(function () {
-            $('.display').DataTable();
+            $('#Student_ID').DataTable();
         });
         $(document).ready(function () {
             $('.js-example-basic-multiple').select2();

@@ -22,11 +22,9 @@ namespace student
                 FillGrid();
                 FillCity();
                 FillSpecialization();
+                BindGrid();
             }
-            if (!this.IsPostBack)
-            {
-                this.BindGrid();
-            }
+          
         }
         private void FillCity()
         {
@@ -158,6 +156,7 @@ namespace student
 
 
         }
+
 
         private void FillSpecialization()
         {
